@@ -1,5 +1,10 @@
-<nav class="w-full h-4rem bg-orange-700 flex">
+<nav class="w-full h-4rem bg-orange-700 flex align-items-center justify-content-between" style="padding: 10px">
+  <!-- kiri -->
   <h2 style="color: white;">Mon-app</h2>
-  <p-button label="Home" />
-  <p-button label="About" />
+  <!-- kanan -->
+  <div class="flex">
+    <p-button label="Home" (onClick)="navigateTo('/')"/>
+    <p-button label="About" (onClick)="navigateTo('/about')"/>
+  </div>
+
 </nav>
