@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { TableModule } from 'primeng/table';
+import { MainService } from '../../services/main.service';
 
 @Component({
   selector: 'app-main-page',
@@ -10,7 +11,7 @@ import { TableModule } from 'primeng/table';
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnInit {
   tableName = "Tabel Monitoring Users";
   users = [
     {
@@ -47,5 +48,27 @@ export class MainPageComponent {
         "STATUS_EMAIL": "Email Tidak Terdaftar di Database Kominfo"
     }
   ]
+  title: string = '';
+  subtitle: string = '';
+
+  dataList = [];
+
+  constructor(
+    private mainService: MainService
+  ) {}
+  ngOnInit(): void {
+    this.mainService.getMainData().subscribe((response: any) => {
+      console.log(response);
+      if (response.status == 'success') {
+        this.dataList = response.data.body;
+        this.title = response.data.title;
+        this.subtitle = response.data.subtitle;
+      }
+
+    },
+    (error) => {
+      console.log(error);
+    })
+  }
 
 }
