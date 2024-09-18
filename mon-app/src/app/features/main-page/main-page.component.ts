@@ -57,7 +57,7 @@ export class MainPageComponent implements OnInit {
     private mainService: MainService
   ) {}
   ngOnInit(): void {
-    this.mainService.getMainData().subscribe((response: any) => {
+    this.mainService.getMainData().subscribe((response) => {
       console.log(response);
       if (response.status == 'success') {
         this.dataList = response.data.body;
